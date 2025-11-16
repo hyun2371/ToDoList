@@ -1,0 +1,13 @@
+spring:
+  jpa:
+    show-sql: true            # ✔ SQL 출력 ON
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.orm.jdbc.bind: trace    # 파라미터 바인딩까지 출력 (Hibernate 6)
