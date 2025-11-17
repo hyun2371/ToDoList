@@ -1,4 +1,5 @@
 # 공유 ToDo 리스트 서비스
+
 ## 목차
 
 - [공유 ToDo 리스트 서비스](#공유-todo-리스트-서비스)
@@ -15,6 +16,8 @@
         - [Todo 업데이트 테스트 검증 문제](#todo-업데이트-테스트-검증-문제)
         - [ToDo 순서 정렬 설계](#todo-순서-정렬-설계)
         - [추가 구현하면 좋을 것](#추가-구현하면-좋을-것)
+<br>
+      
 ## 빠른 실행
 1. 프로젝트 클론
     ```bash
@@ -41,6 +44,7 @@
     ```bash
     /gradlew bootRun
     ```
+<br>
 
 ## 기능 구현
 ### 요구사항
@@ -52,13 +56,14 @@
 - [x]  사용자, 태그, 완료 여부를 조건으로 ToDo를 필터링할 수 있어야 함
 - [x]  ToDo를 다른 사용자에게 조회만 가능한 상태로 공유할 수 있어야 함
 - [x]  ToDo를 생성한 사용자만 수정/삭제할 수 있어야 함
+<br>
 
 ### 고려사항
 - 현재 관리자(admin)의 ToDo 수정/삭제 권한  정책이 결정되지 않은 상황<br>
   → role admin 추가
 - 차후에 삭제한 ToDo를 되돌리는 요구사항이 추가될 수 있음<br>
   → SoftDelete 추가
-
+<br>
 
 ## 프로젝트 구성 요소
 ### 기술스택
@@ -71,12 +76,17 @@
 - **Test**: JUnit5, Spring Boot Test, Testcontainers
 - **Build Tool**: Gradle
 
-### ERD
-<img src="./docs/ERD.png" width="600" />
+<br>
 
 ### API 명세서
 - 애플리케이션 실행 후 접속
-    http://localhost:8080/swagger-ui/index.html
+  http://localhost:8080/swagger-ui/index.html
+
+
+### ERD
+<img src="./docs/ERD.png" width="600" />
+
+<br><br>
 
 ### 디렉토리 구조
 ```
@@ -94,6 +104,7 @@ src
          ├── todo          # ToDo 통합 테스트, 단위테스트
          └── share         # 공유 기능 통합 테스트
 ```
+<br>
 
 ## 설계 시 고민한 지점
 
@@ -106,7 +117,6 @@ src
     ```java
     assertThat(updatedTodo.getCategory()).isEqualTo(prevTodo.getCategory());
     ```
-
 
 원인
 
@@ -126,6 +136,8 @@ src
 - 하나의 트랜잭션 안에서 테스트가 실행되면 영속성 컨텍스트가 공유되어 의도한 테스트가 실패할 수 있다.
 - 테스트에서는 엔티티 조회 → 변경 → 재조회를 검증해야 하므로 트랜잭션을 분리하는 것이 중요하다.
 
+<br>
+
 ### ToDo 순서 정렬 설계
 
 순서 정렬 구현 방식
@@ -137,6 +149,8 @@ Redis 사용하지 않은 이유
 
 - 순서 변경이 빈번하나 bulk update를 사용하면 부하가 크지 않을 것이라고 판단했습니다.
 - Redis와 DB 간 데이터 정합성을 관리하는 것이 큰 비용이라고 생각했습니다.
+
+<br>
 
 ### 추가 구현하면 좋을 것
 
