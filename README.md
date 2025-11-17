@@ -33,7 +33,7 @@
 - **Build Tool**: Gradle
 
 ### ERD
-<img src="./docs/erd.png" width="600" />
+<img src="./docs/ERD.png" width="600" />
 
 ### API 명세서
 - 애플리케이션 실행 후 접속
